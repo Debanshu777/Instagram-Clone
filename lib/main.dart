@@ -8,6 +8,7 @@ import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/screens/signup_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ void main() async {
         apiKey: dotenv.env['API_KEY'] ?? '',
         appId: dotenv.env['APP_ID'] ?? '',
         messagingSenderId: dotenv.env['MESSENGING_SENDER_ID'] ?? '',
-        projectId: dotenv.env['MESSENGING_SENDER_ID'] ?? '',
+        projectId: dotenv.env['PROJECT_ID'] ?? '',
         storageBucket: dotenv.env['STORAGE_BUCKET'],
       ),
     );
@@ -34,16 +35,44 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Instagram',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: mobileBackgroundColor,
-      ),
-      home: LoginScreen(),
-      // home: const ResponsiveLayout(
-      //     mobileScreenLayout: MobileScreenLayout(),
-      //     webScreenLayout: WebScreenLayout()),
-    );
+    try {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Instagram',
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: mobileBackgroundColor,
+        ),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active) {
+              if (snapshot.hasData) {
+                return const ResponsiveLayout(
+                  mobileScreenLayout: MobileScreenLayout(),
+                  webScreenLayout: WebScreenLayout(),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text('${snapshot.error}'),
+                );
+              }
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: primaryColor,
+                ),
+              );
+            }
+            return const LoginScreen();
+          },
+        ),
+      );
+    } catch (err) {
+      print(err);
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
   }
 }
