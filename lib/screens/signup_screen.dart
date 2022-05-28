@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:typed_data';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
+import 'package:instagram_clone/utils/utils.dart';
 
 import '../utils/colors.dart';
 import '../widgets/text_field_input.dart';
@@ -16,6 +20,8 @@ class _LoginScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
+  Uint8List? _profileImage;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -24,6 +30,30 @@ class _LoginScreenState extends State<SignUpScreen> {
     _passwordController.dispose();
     _bioController.dispose();
     _userNameController.dispose();
+  }
+
+  void selectImage() async {
+    Uint8List image = await pickImage(ImageSource.gallery);
+    setState(() {
+      _profileImage = image;
+    });
+  }
+
+  void signUpUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String response = await AuthMethods().signUpUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        userName: _userNameController.text,
+        bio: _bioController.text,
+        file: _profileImage!);
+    if (!mounted) return;
+    showSnackbar(response, context);
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -50,12 +80,17 @@ class _LoginScreenState extends State<SignUpScreen> {
             ),
             Stack(
               children: [
-                const CircleAvatar(
-                  radius: 64,
-                  backgroundImage: NetworkImage(
-                    'https://images.unsplash.com/photo-1653731415753-703b08005ae6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80',
-                  ),
-                ),
+                _profileImage != null
+                    ? CircleAvatar(
+                        radius: 64,
+                        backgroundImage: MemoryImage(_profileImage!))
+                    : const CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        radius: 64,
+                        backgroundImage: NetworkImage(
+                          'https://180dc.org/wp-content/uploads/2016/08/default-profile.png',
+                        ),
+                      ),
                 Positioned(
                   bottom: 0,
                   left: 80,
@@ -67,7 +102,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                       color: blueColor,
                     ),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: selectImage,
                       splashColor: Colors.blue,
                       icon: const Icon(
                         Icons.add_a_photo,
@@ -114,6 +149,7 @@ class _LoginScreenState extends State<SignUpScreen> {
               height: 24,
             ),
             InkWell(
+              onTap: signUpUser,
               child: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
@@ -128,7 +164,12 @@ class _LoginScreenState extends State<SignUpScreen> {
                   ),
                   color: blueColor,
                 ),
-                child: const Text("Sign Up"),
+                child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ))
+                    : const Text("Sign Up"),
               ),
             ),
             const SizedBox(

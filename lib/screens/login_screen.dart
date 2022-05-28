@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
@@ -91,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.symmetric(
                     vertical: 8,
                   ),
-                  child: const Text("Don't have an account?"),
+                  child: const Text("Don't have an account? "),
                 ),
                 GestureDetector(
                   onTap: () {},
@@ -100,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       vertical: 8,
                     ),
                     child: const Text(
-                      "SignUp",
+                      "Sign Up",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
