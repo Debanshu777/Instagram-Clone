@@ -20,10 +20,10 @@ class AuthMethods {
   }) async {
     String response = "Some error occured";
     try {
-      if (email.isNotEmpty ||
-          password.isNotEmpty ||
-          userName.isNotEmpty ||
-          bio.isNotEmpty ||
+      if (email.isNotEmpty &&
+          password.isNotEmpty &&
+          userName.isNotEmpty &&
+          bio.isNotEmpty &&
           file != null) {
         //register user
         UserCredential creds = await _auth.createUserWithEmailAndPassword(
@@ -54,6 +54,30 @@ class AuthMethods {
         response = 'Email is not properly formated';
       } else if (err.code == 'weak-password') {
         response = 'Password should be atleast 6 character';
+      }
+    } catch (err) {
+      response = err.toString();
+    }
+    return response;
+  }
+
+  //login user
+  Future<String> loginUser(
+      {required String email, required String password}) async {
+    String response = "Some error ocurred";
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        response = "Signed In Successfully";
+      } else {
+        response = "Please enter all the fields";
+      }
+    } on FirebaseAuthException catch (err) {
+      if (err.code == "user-not-found") {
+        response = "User Doesn't Exist or have been deleted";
+      } else if (err.code == 'wrong-password') {
+        response = 'Password is incorrect';
       }
     } catch (err) {
       response = err.toString();
