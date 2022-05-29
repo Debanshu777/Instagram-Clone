@@ -8,9 +8,9 @@ class User {
   final String bio;
   final List followers;
   final List following;
-  final DateTime createdOn;
-  final DateTime updatedOn;
-  final DateTime lastSeen;
+  final Timestamp createdOn;
+  final Timestamp updatedOn;
+  final Timestamp lastSeen;
 
   const User({
     required this.username,

@@ -11,6 +11,13 @@ class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Future<model.User> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+    DocumentSnapshot snap =
+        await _firestore.collection('users').doc(currentUser.uid).get();
+    return model.User.fromSnap(snap);
+  }
+
   //Sign up user
   Future<String> signUpUser({
     required String email,
@@ -44,9 +51,9 @@ class AuthMethods {
           followers: [],
           following: [],
           photoUrl: phtotoUrl,
-          createdOn: DateTime.now(),
-          updatedOn: DateTime.now(),
-          lastSeen: DateTime.now(),
+          createdOn: Timestamp.now(),
+          updatedOn: Timestamp.now(),
+          lastSeen: Timestamp.now(),
         );
 
         // saving to database
