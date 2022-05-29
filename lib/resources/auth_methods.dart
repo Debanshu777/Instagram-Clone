@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/models/User.dart' as model;
 import 'package:instagram_clone/resources/storage_methods.dart';
 
 class AuthMethods {
@@ -34,19 +35,25 @@ class AuthMethods {
         String phtotoUrl = await StorageMethods()
             .uploadImageToStorage('profilePics', file, false);
 
+        // User
+        model.User user = model.User(
+          username: userName,
+          uid: creds.user!.uid,
+          email: email,
+          bio: bio,
+          followers: [],
+          following: [],
+          photoUrl: phtotoUrl,
+          createdOn: DateTime.now(),
+          updatedOn: DateTime.now(),
+          lastSeen: DateTime.now(),
+        );
+
         // saving to database
-        await _firestore.collection('users').doc(creds.user!.uid).set({
-          'username': userName,
-          'uid': creds.user!.uid,
-          'email': email,
-          'bio': bio,
-          'followers': [],
-          'following': [],
-          'photoUrl': phtotoUrl,
-          'createdOn': DateTime.now(),
-          'updatedOn': DateTime.now(),
-          'lastSeen': DateTime.now(),
-        });
+        await _firestore
+            .collection('users')
+            .doc(creds.user!.uid)
+            .set(user.toJson());
         response = "User is Successfully Created";
       }
     } on FirebaseAuthException catch (err) {
