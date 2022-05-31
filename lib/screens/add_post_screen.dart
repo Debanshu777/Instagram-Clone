@@ -11,6 +11,8 @@ import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:provider/provider.dart';
 
+import '../resources/firestore_methods.dart';
+
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({Key? key}) : super(key: key);
 
@@ -73,7 +75,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       _isLoading = true;
     });
     try {
-      String response = await StorageMethods().uploadPost(
+      String response = await FirestoreMethods().uploadPost(
         _descriptionController.text,
         _file!,
         uid,
