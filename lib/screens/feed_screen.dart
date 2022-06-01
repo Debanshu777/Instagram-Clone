@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/post_card.dart';
@@ -39,7 +37,7 @@ class _FeedScreenState extends State<FeedScreen> {
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: primaryColor,
               ),
@@ -48,7 +46,10 @@ class _FeedScreenState extends State<FeedScreen> {
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) =>
-                PostCard(snap: snapshot.data!.docs[index].data()),
+                snapshot.connectionState == ConnectionState.active &&
+                        snapshot.hasData
+                    ? PostCard(snap: snapshot.data!.docs[index].data())
+                    : Container(),
           );
         },
       ),

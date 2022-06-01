@@ -8,7 +8,6 @@ import 'package:instagram_clone/responsive/responsive_layout_screen.dart';
 import 'package:instagram_clone/responsive/web_screen_layout.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/utils.dart';
-
 import '../utils/colors.dart';
 import '../widgets/text_field_input.dart';
 
