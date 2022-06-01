@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +42,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
             .collection('comments')
             .orderBy(
               'datePublished',
-              descending: true,
+              descending: false,
             )
             .snapshots(),
         builder: (context, snapshot) {
