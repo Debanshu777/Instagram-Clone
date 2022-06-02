@@ -271,12 +271,24 @@ class _PostCardState extends State<PostCard> {
                         onTap: () {},
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Text(
-                            'View all $commentLen comments',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: secondaryColor,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CommentsScreen(
+                                  snap: widget.snap,
+                                ),
+                              ),
                             ),
+                            child: commentLen > 0
+                                ? Text(
+                                    'View all $commentLen comments',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: secondaryColor,
+                                    ),
+                                  )
+                                : Container(),
                           ),
                         ),
                       ),

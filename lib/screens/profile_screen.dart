@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
+import 'package:instagram_clone/resources/firestore_methods.dart';
+import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/follow_button.dart';
 
@@ -63,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(5),
             child: Column(
               children: [
                 Row(
@@ -98,9 +101,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ? FollowButton(
                                       background: mobileBackgroundColor,
                                       borderColor: Colors.grey,
-                                      text: "Edit Profile",
+                                      text: "Sign Out",
                                       textColor: primaryColor,
-                                      function: () {},
+                                      function: () async {
+                                        AuthMethods().signOut();
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const LoginScreen(),
+                                          ),
+                                        );
+                                      },
                                     )
                                   : isFollowing
                                       ? FollowButton(
@@ -108,14 +119,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           borderColor: Colors.grey,
                                           text: "Unfollow",
                                           textColor: Colors.black,
-                                          function: () {},
+                                          function: () async {
+                                            await FirestoreMethods().followUser(
+                                                FirebaseAuth
+                                                    .instance.currentUser!.uid,
+                                                userData['uid']);
+                                            setState(() {
+                                              setState(() {
+                                                isFollowing = false;
+                                                followerLen--;
+                                              });
+                                            });
+                                          },
                                         )
                                       : FollowButton(
                                           background: Colors.blue,
                                           borderColor: Colors.blue,
                                           text: "Follow",
                                           textColor: Colors.white,
-                                          function: () {},
+                                          function: () async {
+                                            await FirestoreMethods().followUser(
+                                                FirebaseAuth
+                                                    .instance.currentUser!.uid,
+                                                userData['uid']);
+                                            setState(() {
+                                              isFollowing = true;
+                                              followerLen++;
+                                            });
+                                          },
                                         )
                             ],
                           )
@@ -174,13 +205,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         itemBuilder: (context, index) {
                           DocumentSnapshot snap =
                               (snapshot.data! as dynamic).docs[index];
-                          return Container(
-                            child: Image(
-                              image: NetworkImage(
-                                snap['postUrl'],
-                              ),
-                              fit: BoxFit.cover,
+                          return Image(
+                            image: NetworkImage(
+                              snap['postUrl'],
                             ),
+                            fit: BoxFit.cover,
                           );
                         });
                   },

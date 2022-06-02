@@ -27,6 +27,12 @@ class _FeedScreenState extends State<FeedScreen> {
           IconButton(
             onPressed: () {},
             icon: const Icon(
+              Icons.add_box_outlined,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
               Icons.send_outlined,
             ),
           )
