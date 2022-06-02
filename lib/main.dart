@@ -17,12 +17,12 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: FirebaseOptions(
-        apiKey: dotenv.env['API_KEY'] ?? '',
-        appId: dotenv.env['APP_ID'] ?? '',
-        messagingSenderId: dotenv.env['MESSENGING_SENDER_ID'] ?? '',
-        projectId: dotenv.env['PROJECT_ID'] ?? '',
-        storageBucket: dotenv.env['STORAGE_BUCKET'],
-      ),
+          apiKey: "AIzaSyACISFhU-IlwcyiHkpcz5BMgkOJy-a-flk",
+          authDomain: "instagram-clone-5c122.firebaseapp.com",
+          projectId: "instagram-clone-5c122",
+          storageBucket: "instagram-clone-5c122.appspot.com",
+          messagingSenderId: "392098016095",
+          appId: "1:392098016095:web:0294782b5fce1d451f24ea"),
     );
   } else {
     await Firebase.initializeApp();
