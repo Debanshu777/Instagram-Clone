@@ -108,8 +108,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   staggeredTileBuilder: (index) =>
                       MediaQuery.of(context).size.width > webScreenSize
                           ? StaggeredTile.count(
-                              (index % 9 == 0) ? 2 : 1,
-                              (index % 9 == 0) ? 2 : 1,
+                              (index % 7 == 0) ? 1 : 1,
+                              (index % 7 == 0) ? 1 : 1,
                             )
                           : StaggeredTile.count(
                               (index % 7 == 0) ? 2 : 1,

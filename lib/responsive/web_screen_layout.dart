@@ -81,7 +81,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
               Icons.search,
               color: _page == 2 ? primaryColor : secondaryColor,
             ),
-            onPressed: () => navigationTapped(1),
+            onPressed: () => navigationTapped(2),
           ),
           IconButton(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -89,7 +89,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
               Icons.add_circle,
               color: _page == 3 ? primaryColor : secondaryColor,
             ),
-            onPressed: () => navigationTapped(2),
+            onPressed: () => navigationTapped(3),
           ),
           IconButton(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -97,7 +97,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
               Icons.favorite,
               color: _page == 4 ? primaryColor : secondaryColor,
             ),
-            onPressed: () => navigationTapped(3),
+            onPressed: () => navigationTapped(4),
           ),
           IconButton(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -105,7 +105,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
               Icons.person,
               color: _page == 5 ? primaryColor : secondaryColor,
             ),
-            onPressed: () => navigationTapped(4),
+            onPressed: () => navigationTapped(5),
           ),
           Padding(
               padding:
@@ -118,6 +118,9 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
         onPageChanged: onPageChanged,
         children: [
           const FeedScreen(),
+          const Text(
+            'Meaages',
+          ),
           const SearchScreen(),
           const AddPostScreen(),
           const Text(

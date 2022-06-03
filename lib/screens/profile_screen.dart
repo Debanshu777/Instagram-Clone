@@ -7,6 +7,7 @@ import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/global_variables.dart';
 import 'package:instagram_clone/widgets/follow_button.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -56,6 +57,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MediaQuery.of(context).size.width > webScreenSize
+          ? webBackgroundColor
+          : mobileBackgroundColor,
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
         title: Text(userData.containsKey('username')
@@ -66,7 +70,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.all(5),
+            padding: MediaQuery.of(context).size.width > webScreenSize
+                ? const EdgeInsets.all(15)
+                : const EdgeInsets.all(5),
             child: Column(
               children: [
                 Row(
