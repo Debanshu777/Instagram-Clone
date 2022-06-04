@@ -4,7 +4,7 @@ class Post {
   final String description;
   final String uid;
   final String username;
-  final likes;
+  final List likes;
   final String postId;
   final Timestamp datePublished;
   final String postUrl;
