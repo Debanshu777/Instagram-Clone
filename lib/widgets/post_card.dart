@@ -46,7 +46,6 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context).getUser;
-    final width = MediaQuery.of(context).size.width;
     return user == null
         ? Container()
         : Container(

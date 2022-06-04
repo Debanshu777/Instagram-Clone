@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
-      options: FirebaseOptions(
+      options: const FirebaseOptions(
         apiKey: "AIzaSyACISFhU-IlwcyiHkpcz5BMgkOJy-a-flk",
         authDomain: "instagram-clone-5c122.firebaseapp.com",
         projectId: "instagram-clone-5c122",
