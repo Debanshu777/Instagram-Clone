@@ -33,8 +33,11 @@ Instagram Clone with Flutter 3 and Firebase. This Project focus towards Multiplf
 - [ ] Unit Testing
 - [ ] Adding features to Responsive View
 - [ ] Notification Screen
-- [ ] Github Action Pipeline
 - [ ] Windows and Linux Support
+- [ ] Github Action Pipeline
+
+https://user-images.githubusercontent.com/50791485/172040427-116b3ff7-0d2a-4895-8ffe-4853db710f58.mp4
+
 
 ## Getting Started
 
