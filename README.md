@@ -46,7 +46,7 @@ https://user-images.githubusercontent.com/50791485/172040427-116b3ff7-0d2a-4895-
 ### 2. Clone the repo
 
 ```sh
-$ git clone https://github.com/mohak1283/Instagram-Clone
+$ git clone https://github.com/debanshu777/Instagram-Clone
 $ cd Instagram-Clone/
 ```
 
@@ -128,4 +128,4 @@ Looking for contributors! Don't be shy. 😁 Feel free to open issues/pull reque
 - [Debanshu Datta](https://github.com/Debanshu777)
 
 ## License
-The Instagram name, artwork, trademark are all property of Meta Inc. This project is provided for educational purposes only. It is not affiliated with and has not been approved by Snap Inc.
+The Instagram name, artwork, trademark are all property of Meta Inc. This project is provided for educational purposes only. It is not affiliated with and has not been approved by Meta Inc.
