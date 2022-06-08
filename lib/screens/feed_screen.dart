@@ -68,7 +68,7 @@ class _FeedScreenState extends State<FeedScreen> {
                         snapshot.hasData
                     ? Container(
                         margin: EdgeInsets.symmetric(
-                          horizontal: width >= webScreenSize ? width * 0.3 : 0,
+                          horizontal: width >= webScreenSize ? width * 0.25 : 0,
                           vertical: width >= webScreenSize ? 15 : 0,
                         ),
                         child: PostCard(
