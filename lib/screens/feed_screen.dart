@@ -4,6 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/global_variables.dart';
 import 'package:instagram_clone/widgets/post_card.dart';
+import 'package:provider/provider.dart';
+
+import '../models/User.dart';
+import '../providers/user_provider.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -68,7 +72,7 @@ class _FeedScreenState extends State<FeedScreen> {
                         snapshot.hasData
                     ? Container(
                         margin: EdgeInsets.symmetric(
-                          horizontal: width >= webScreenSize ? width * 0.25 : 0,
+                          horizontal: width >= webScreenSize ? width * 0.3 : 0,
                           vertical: width >= webScreenSize ? 15 : 0,
                         ),
                         child: PostCard(
