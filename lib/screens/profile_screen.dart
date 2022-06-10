@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
@@ -157,7 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       : 'Loading',
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w200,
-                                    fontSize: 24.sp,
+                                    fontSize: 24,
                                   ),
                                 ),
                                 FirebaseAuth.instance.currentUser!.uid ==
