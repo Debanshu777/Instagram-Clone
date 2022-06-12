@@ -225,33 +225,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               buildStatColumn(followingLen, "Following"),
                             ],
                           ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 15),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  userData.containsKey('username')
+                                      ? userData['username']
+                                      : 'Loading',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: double.infinity,
+                                alignment: Alignment.centerLeft,
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
+                                child: Text(
+                                  userData.containsKey('bio')
+                                      ? userData['bio']
+                                      : 'loading',
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
                   ],
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(
-                    top: 15,
-                  ),
-                  child: Text(
-                    userData.containsKey('username')
-                        ? userData['username']
-                        : 'Loading',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(
-                    top: 15,
-                  ),
-                  child: Text(
-                    userData.containsKey('bio') ? userData['bio'] : 'loading',
-                  ),
                 ),
               ],
             ),
