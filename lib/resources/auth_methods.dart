@@ -1,5 +1,4 @@
-import 'dart:typed_data';
-
+import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram_clone/models/User.dart' as model;
@@ -33,7 +32,9 @@ class AuthMethods {
         //register user
         UserCredential creds = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
-        print(creds.user!.uid);
+        if (kDebugMode) {
+          print(creds.user!.uid);
+        }
 
         //Uplaoding photo
         String phtotoUrl = await StorageMethods()

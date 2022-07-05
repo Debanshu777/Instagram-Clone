@@ -9,7 +9,7 @@ import '../providers/user_provider.dart';
 import '../widgets/comment_card.dart';
 
 class CommentsScreen extends StatefulWidget {
-  final snap;
+  final Map<String, dynamic> snap;
   const CommentsScreen({Key? key, required this.snap}) : super(key: key);
 
   @override

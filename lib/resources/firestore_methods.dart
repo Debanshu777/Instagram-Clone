@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram_clone/resources/storage_methods.dart';
 import 'package:uuid/uuid.dart';
@@ -51,7 +51,9 @@ class FirestoreMethods {
         });
       }
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
@@ -76,10 +78,14 @@ class FirestoreMethods {
           },
         );
       } else {
-        print('Text Is empty');
+        if (kDebugMode) {
+          print('Text Is empty');
+        }
       }
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
@@ -87,7 +93,9 @@ class FirestoreMethods {
     try {
       await _firestore.collection('posts').doc(postId).delete();
     } catch (err) {
-      print(err.toString());
+      if (kDebugMode) {
+        print(err.toString());
+      }
     }
   }
 
@@ -115,7 +123,9 @@ class FirestoreMethods {
         });
       }
     } catch (err) {
-      print(err.toString());
+      if (kDebugMode) {
+        print(err.toString());
+      }
     }
   }
 }
