@@ -76,7 +76,9 @@ class MyApp extends StatelessWidget {
         ),
       );
     } catch (err) {
-      print(err);
+      if (kDebugMode) {
+        print(err);
+      }
       return const Center(
         child: CircularProgressIndicator(),
       );

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/resources/firestore_methods.dart';
@@ -48,7 +49,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .contains(FirebaseAuth.instance.currentUser!.uid);
       setState(() {});
     } catch (err) {
-      print(err.toString());
+      if (kDebugMode) {
+        print(err.toString());
+      }
     }
   }
 
